@@ -1,9 +1,29 @@
-let board = document.querySelector(".board");
-board.style.gridTemplateColumns = "repeat(16 , 1fr)";
-board.style.gridTemplateRows = "repeat(16 , 1fr)";
+function populateBoard(size) {
+  let board = document.querySelector(".board");
+  let squares = document.querySelectorAll("div");
+  squares.forEach((div) => div.remove);
 
-for (let i = 0; i < 256; i++) {
-  let square = document.createElement("div");
-  square.style.backgroundColor = "blue";
-  board.insertAdjacentElement("beforeend", square);
+  board.style.gridTemplateColumns = `repeat(${size} , 1fr)`;
+  board.style.gridTemplateRows = `repeat(${size} , 1fr)`;
+
+  let amount = size * size;
+  for (let i = 0; i < amount; i++) {
+    let square = document.createElement("div");
+    square.addEventListener(
+      "mouseover",
+      () => (square.style.backgroundColor = "black")
+    );
+    square.style.backgroundColor = "blue";
+    board.insertAdjacentElement("beforeend", square);
+  }
+}
+
+populateBoard(16);
+
+function changeSize(input) {
+  if (input >= 2 && input <= 100) {
+    populateBoard(input);
+  } else {
+    console.log("too many squares");
+  }
 }
