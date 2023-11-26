@@ -13,15 +13,17 @@
       <div class="content">
         <div class="board"></div>
         <div class="buttons">
-          <button>White</button>
-          <button>Black</button>
-          <button>Random</button>
+          <button onclick="changeColor('black')">Black</button>
+          <button onclick="changeColor('gray')">Gray</button>
+          <button onclick="changeColor('white')">Eraser</button>
+          <button onclick="changeColor('random')">Random</button>
           <button>Reset</button>
         </div>
         <div>
           <input
             type="text"
             placeholder="Size of Board"
+            value="16"
             onchange="changeSize(this.value)"
           />
           <button>Set Size</button>
