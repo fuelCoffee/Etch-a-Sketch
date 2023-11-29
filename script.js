@@ -1,28 +1,37 @@
 "use strict";
 
 let color = "black";
+let board = document.querySelector(".board");
 
-function populateBoard(size) {
-  let board = document.querySelector(".board");
+createGrid(board, 16);
+
+function createGrid(board, newSize) {
+  //clear current grid
+  while (board.firstChild) {
+    board.removeChild(board.firstChild);
+  }
+
   let squares = board.querySelectorAll("div");
   squares.forEach((div) => (div.style.backgroundColor = "white"));
-  board.style.gridTemplateColumns = `repeat(${size} , 1fr)`;
-  board.style.gridTemplateRows = `repeat(${size} , 1fr)`;
 
-  let amount = size * size;
-  for (let i = 0; i < amount; i++) {
-    let square = document.createElement("div");
-    square.addEventListener("mouseover", colorSquare);
-    square.style.backgroundColor = "white";
-    board.insertAdjacentElement("beforeend", square);
+  for (let c = 0; c < newSize; c++) {
+    let gridRow = document.createElement("div");
+    gridRow.classList.add("row");
+
+    for (let i = 0; i < newSize; i++) {
+      let square = document.createElement("div");
+      square.classList.add("square");
+      square.addEventListener("mouseover", colorSquare);
+      square.style.backgroundColor = "white";
+      gridRow.appendChild(square);
+    }
+    board.appendChild(gridRow);
   }
 }
 
-populateBoard(16);
-
 function changeSize(input) {
   if (input >= 2 && input <= 100) {
-    populateBoard(input);
+    createGrid(board, input);
   } else {
     console.log("too many squares");
   }
